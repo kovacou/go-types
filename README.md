@@ -5,21 +5,40 @@ Thread-safe types also supported.
 
 ## Support atomic
 
-* Maps :
-    * `Map`
+### Maps :
 
-* Slices :
-    * `Uints`
-    * `Int64s`
-    * `Uint64s`
+|  Alias     |      Type                    |
+|:----------:|:----------------------------:|
+| Map        |  `map[string]interface{}`    |
+
+
+
+
+### Slices :
+
+|  Alias     |      Type      |
+|:----------:|:--------------:|
+| Ints       |  `[]int`       |
+| Uints      |  `[]uint`      |
+| Int64s     |  `[]int64`     |
+| Uint64s    |  `[]uint64`    |
+| Floats     |  `[]float64`   |
+| Strings    |  `[]string`    |
+| Bytes      |  `[]byte`      |
 
 ## Support sync
 
-You need to call `Init()` before using the type.
+You can use the wrapper `types.SyncXXX()` :
 ```go
-m := SyncMap{}
-m.Init(5) // Initialize mutex and internal value.
+m := types.SyncMap()
 ```
 
-* Maps
-    * `SyncMap`
+Or use the struct definition `types.TSafeXXX` :
+```go
+m := types.TSafeMap{}
+m.Init(5)
+```
+
+|  Alias     |      Wrapper   |     Type                 |
+|:----------:|:--------------:|:------------------------:|
+| TSafeMap   | `SyncMap()`    | `map[string]interface{}` |
