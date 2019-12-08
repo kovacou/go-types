@@ -1,4 +1,4 @@
-// Copyright © 2019 Alexandre Kovac <contact@kovacou.fr>.
+// Copyright © 2019 Alexandre Kovac <contact@kovacou.com>.
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
@@ -89,6 +89,27 @@ func (s Floats) Equal(s2 Floats) bool {
 		return true
 	}
 	return false
+}
+
+// Find the first element matching the pattern.
+func (s Floats) Find(matcher func(v float64) bool) (float64, bool) {
+	for _, val := range s {
+		if matcher(val) {
+			return val, true
+		}
+	}
+	return 0, false
+}
+
+// FindAll elements matching the pattern.
+func (s Floats) FindAll(matcher func(v float64) bool) Floats {
+	out := Floats{}
+	for _, val := range s {
+		if matcher(val) {
+			out = append(out, val)
+		}
+	}
+	return out
 }
 
 // First return the value of the first element.
