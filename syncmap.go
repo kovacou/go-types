@@ -20,6 +20,23 @@ type TSafeMap struct {
 	values Map
 }
 
+// Add a new entry if the given key is not filled.
+func (m *TSafeMap) Add(k string, v interface{}) {
+	m.mu.Lock()
+	if _, ok := m.values[k]; !ok {
+		m.values[k] = v
+	}
+	m.mu.Unlock()
+}
+
+// Get an element from the key.
+func (m *TSafeMap) Get(k string) (v interface{}, ok bool) {
+	m.mu.RLock()
+	v, ok = m.values[k]
+	m.mu.RUnlock()
+	return
+}
+
 // Init the map with the given buffer.
 func (m *TSafeMap) Init(n int) {
 	if m.values == nil {
@@ -41,15 +58,6 @@ func (m *TSafeMap) Map() (out Map) {
 func (m *TSafeMap) Set(k string, v interface{}) {
 	m.mu.Lock()
 	m.values[k] = v
-	m.mu.Unlock()
-}
-
-// Add a new entry if the given key is not filled.
-func (m *TSafeMap) Add(k string, v interface{}) {
-	m.mu.Lock()
-	if _, ok := m.values[k]; !ok {
-		m.values[k] = v
-	}
 	m.mu.Unlock()
 }
 
