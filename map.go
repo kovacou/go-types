@@ -1,4 +1,4 @@
-// Copyright © 2019 Alexandre Kovac <contact@kovacou.fr>.
+// Copyright © 2019 Alexandre Kovac <contact@kovacou.com>.
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
@@ -25,6 +25,27 @@ func (m Map) Copy() Map {
 	out := Map{}
 	for k, v := range m {
 		out[k] = v
+	}
+	return out
+}
+
+// Find the first element matching the pattern.
+func (m Map) Find(matcher func(k string, v interface{}) bool) (string, interface{}, bool) {
+	for k, v := range m {
+		if matcher(k, v) {
+			return k, v, true
+		}
+	}
+	return "", nil, false
+}
+
+// FindAll elements matching the pattern.
+func (m Map) FindAll(matcher func(k string, v interface{}) bool) Map {
+	out := Map{}
+	for k, v := range m {
+		if matcher(k, v) {
+			out[k] = v
+		}
 	}
 	return out
 }
