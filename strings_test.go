@@ -97,13 +97,13 @@ func TestStringsFirst(t *testing.T) {
 	{
 		v, ok := s2.First()
 		assert.False(t, ok)
-		assert.Equal(t, string("0"), v)
+		assert.Equal(t, "", v)
 	}
 
 	{
 		v, ok := s3.First()
 		assert.True(t, ok)
-		assert.Equal(t, string(2), v)
+		assert.Equal(t, "2", v)
 	}
 }
 
@@ -121,7 +121,7 @@ func TestStringsGet(t *testing.T) {
 	{
 		v, ok := s2.Get(6)
 		assert.False(t, ok)
-		assert.Equal(t, "0", v)
+		assert.Equal(t, "", v)
 	}
 
 	{
@@ -155,7 +155,7 @@ func TestStringsLast(t *testing.T) {
 	{
 		v, ok := s2.Last()
 		assert.False(t, ok)
-		assert.Equal(t, "0", v)
+		assert.Equal(t, "", v)
 	}
 
 	{
