@@ -7,21 +7,31 @@ package types
 
 import "sync"
 
-// SyncMap return a new thread safe map.
+// TSafeMap abstract the implementation of SyncMap.
+type TSafeMap interface {
+	Add(string, interface{})
+	Get(string) (interface{}, bool)
+	Map() Map
+	Set(string, interface{})
+	Reset()
+}
+
+// SyncMap return a new ThreadSafeMap.
 func SyncMap() TSafeMap {
-	m := TSafeMap{}
-	m.Init(0)
-	return m
+	return &tsafeMap{
+		values: make(Map, 0),
+		mu:     &sync.RWMutex{},
+	}
 }
 
 // TSafeMap is a map thread safe.
-type TSafeMap struct {
+type tsafeMap struct {
 	mu     *sync.RWMutex
 	values Map
 }
 
 // Add a new entry if the given key is not filled.
-func (m *TSafeMap) Add(k string, v interface{}) {
+func (m *tsafeMap) Add(k string, v interface{}) {
 	m.mu.Lock()
 	if _, ok := m.values[k]; !ok {
 		m.values[k] = v
@@ -30,24 +40,15 @@ func (m *TSafeMap) Add(k string, v interface{}) {
 }
 
 // Get an element from the key.
-func (m *TSafeMap) Get(k string) (v interface{}, ok bool) {
+func (m *tsafeMap) Get(k string) (v interface{}, ok bool) {
 	m.mu.RLock()
 	v, ok = m.values[k]
 	m.mu.RUnlock()
 	return
 }
 
-// Init the map with the given buffer.
-func (m *TSafeMap) Init(n int) {
-	if m.values == nil {
-		m.values = make(Map, n)
-	}
-
-	m.mu = &sync.RWMutex{}
-}
-
 // Map convert TSafeMap to Map.
-func (m *TSafeMap) Map() (out Map) {
+func (m *tsafeMap) Map() (out Map) {
 	m.mu.RLock()
 	out = m.values.Copy()
 	m.mu.RUnlock()
@@ -55,14 +56,14 @@ func (m *TSafeMap) Map() (out Map) {
 }
 
 // Set a new entry or change an entry for the given key "k".
-func (m *TSafeMap) Set(k string, v interface{}) {
+func (m *tsafeMap) Set(k string, v interface{}) {
 	m.mu.Lock()
 	m.values[k] = v
 	m.mu.Unlock()
 }
 
 // Reset the values.
-func (m *TSafeMap) Reset() {
+func (m *tsafeMap) Reset() {
 	m.mu.Lock()
 	m.values.Reset()
 	m.mu.Unlock()

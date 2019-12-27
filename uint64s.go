@@ -152,6 +152,19 @@ func (s Uint64s) Len() int {
 	return len(s)
 }
 
+// Mean of the slice.
+func (s Uint64s) Mean() (mean float64) {
+	return float64(s.Sum()) / float64(s.Len())
+}
+
+// Sum of the slice.
+func (s Uint64s) Sum() (sum uint64) {
+	for _, v := range s {
+		sum += v
+	}
+	return
+}
+
 // Take n element and return a new slice.
 func (s Uint64s) Take(n int) (out Uint64s) {
 	if n < 0 || n > s.Len() {

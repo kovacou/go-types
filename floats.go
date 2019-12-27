@@ -128,8 +128,8 @@ func (s Floats) Get(i int) (float64, bool) {
 	return s[i], true
 }
 
-// float64ersect return the float64ersection between "s" and "s2".
-func (s Floats) float64ersect(s2 Floats) Floats {
+// Intersect return the intersection between "s" and "s2".
+func (s Floats) Intersect(s2 Floats) Floats {
 	out := Floats{}
 	for _, v := range s {
 		if s2.Contains(v) {
@@ -150,6 +150,19 @@ func (s Floats) Last() (float64, bool) {
 // Len return the size of the slice.
 func (s Floats) Len() int {
 	return len(s)
+}
+
+// Mean of the slice.
+func (s Floats) Mean() (mean float64) {
+	return s.Sum() / float64(s.Len())
+}
+
+// Sum of the slice.
+func (s Floats) Sum() (sum float64) {
+	for _, v := range s {
+		sum += v
+	}
+	return
 }
 
 // Take n element and return a new slice.
