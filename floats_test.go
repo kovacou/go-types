@@ -131,14 +131,14 @@ func TestFloatsGet(t *testing.T) {
 	}
 }
 
-func TestFloatsfloat64ersect(t *testing.T) {
+func TestFloatsIntersect(t *testing.T) {
 	s := Floats{1, 2, 3}
 	s2 := Floats{2, 3, 4, 5}
 	s3 := Floats{}
 
-	assert.Equal(t, Floats{2, 3}, s.float64ersect(s2))
-	assert.Equal(t, s3, s3.float64ersect(s))
-	assert.Equal(t, s3, s.float64ersect(s3))
+	assert.Equal(t, Floats{2, 3}, s.Intersect(s2))
+	assert.Equal(t, s3, s3.Intersect(s))
+	assert.Equal(t, s3, s.Intersect(s3))
 }
 
 func TestFloatsLast(t *testing.T) {
