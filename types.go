@@ -1,5 +1,7 @@
 package types
 
+import "time"
+
 // Int return the value of `v`.
 func Int(v *int) int {
 	if v != nil {
@@ -49,5 +51,31 @@ func String(v *string) string {
 
 // StringPtr return the value of `v`.
 func StringPtr(v string) *string {
+	return &v
+}
+
+// Bool return the value of `v`.
+func Bool(v *bool) bool {
+	if v != nil {
+		return *v
+	}
+	return false
+}
+
+// BoolPtr return a pointer of `v`.
+func BoolPtr(v bool) *bool {
+	return &v
+}
+
+// Time return the value of `v`.
+func Time(v *time.Time) time.Time {
+	if v != nil {
+		return *v
+	}
+	return time.Time{}
+}
+
+// TimePtr return a pointer of `v`.
+func TimePtr(v time.Time) *time.Time {
 	return &v
 }
