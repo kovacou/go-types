@@ -25,6 +25,7 @@ Thread-safe types also supported.
 | Floats     |  `[]float64`   |
 | Strings    |  `[]string`    |
 | Bytes      |  `[]byte`      |
+| Bools      |  `[]bool`      |
 
 ## Support sync
 
