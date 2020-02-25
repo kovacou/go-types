@@ -13,7 +13,7 @@ func (s *Strings) Reset() {
 	*s = []string{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Strings) Contains(values ...string) bool {
 	findNum := 0
 	for i := range s {
@@ -46,7 +46,7 @@ func (s Strings) Copy() Strings {
 	return out
 }
 
-// Diff return the difference between "s" and "s2".
+// Diff returns the difference between "s" and "s2".
 func (s Strings) Diff(s2 Strings) Strings {
 	if s.Empty() {
 		return s2.Copy()
@@ -147,7 +147,7 @@ func (s Strings) Last() (string, bool) {
 	return "", false
 }
 
-// Len return the size of the slice.
+// Len returns the size of the slice.
 func (s Strings) Len() int {
 	return len(s)
 }
@@ -162,7 +162,7 @@ func (s Strings) Take(n int) (out Strings) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Strings into []interface{}
+// S convert s into []interface{}
 func (s Strings) S() (out []interface{}) {
 	for _, v := range s {
 		out = append(out, v)

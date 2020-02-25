@@ -13,7 +13,7 @@ func (s *Bytes) Reset() {
 	*s = []byte{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Bytes) Contains(values ...byte) bool {
 	findNum := 0
 	for i := range s {
@@ -46,7 +46,7 @@ func (s Bytes) Copy() Bytes {
 	return out
 }
 
-// Diff return the difference between "s" and "s2".
+// Diff returns the difference between "s" and "s2".
 func (s Bytes) Diff(s2 Bytes) Bytes {
 	if s.Empty() {
 		return s2.Copy()
@@ -147,7 +147,7 @@ func (s Bytes) Last() (byte, bool) {
 	return 0, false
 }
 
-// Len return the size of the slice.
+// Len returns the size of the slice.
 func (s Bytes) Len() int {
 	return len(s)
 }
@@ -162,7 +162,7 @@ func (s Bytes) Take(n int) (out Bytes) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Bytes into []interface{}
+// S convert s into []interface{}
 func (s Bytes) S() (out []interface{}) {
 	for _, v := range s {
 		out = append(out, v)

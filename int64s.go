@@ -13,7 +13,7 @@ func (s *Int64s) Reset() {
 	*s = []int64{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Int64s) Contains(values ...int64) bool {
 	findNum := 0
 	for i := range s {
@@ -46,7 +46,7 @@ func (s Int64s) Copy() Int64s {
 	return out
 }
 
-// Diff return the difference between "s" and "s2".
+// Diff returns the difference between "s" and "s2".
 func (s Int64s) Diff(s2 Int64s) Int64s {
 	if s.Empty() {
 		return s2.Copy()
@@ -147,7 +147,7 @@ func (s Int64s) Last() (int64, bool) {
 	return 0, false
 }
 
-// Len return the size of the slice.
+// Len returns the size of the slice.
 func (s Int64s) Len() int {
 	return len(s)
 }
@@ -175,7 +175,7 @@ func (s Int64s) Take(n int) (out Int64s) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Int64s into []interface{}
+// S convert s into []interface{}
 func (s Int64s) S() (out []interface{}) {
 	for _, v := range s {
 		out = append(out, v)

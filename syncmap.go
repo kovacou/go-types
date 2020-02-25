@@ -10,6 +10,8 @@ import "sync"
 // TSafeMap abstract the implementation of SyncMap.
 type TSafeMap interface {
 	Add(string, interface{})
+	Find(Matcher) (string, interface{}, bool)
+	FindAll(Matcher) Map
 	Get(string) (interface{}, bool)
 	Map() Map
 	Set(string, interface{})
@@ -19,8 +21,8 @@ type TSafeMap interface {
 // SyncMap return a new ThreadSafeMap.
 func SyncMap() TSafeMap {
 	return &tsafeMap{
-		values: make(Map, 0),
-		mu:     &sync.RWMutex{},
+		&sync.RWMutex{},
+		make(Map, 0),
 	}
 }
 
@@ -37,6 +39,22 @@ func (m *tsafeMap) Add(k string, v interface{}) {
 		m.values[k] = v
 	}
 	m.mu.Unlock()
+}
+
+// Find the first element matching the pattern.
+func (m *tsafeMap) Find(matcher Matcher) (k string, v interface{}, ok bool) {
+	m.mu.RLock()
+	k, v, ok = m.values.Find(matcher)
+	m.mu.RUnlock()
+	return
+}
+
+// FindAll elements matching the pattern.
+func (m *tsafeMap) FindAll(matcher Matcher) (out Map) {
+	m.mu.RLock()
+	out = m.values.FindAll(matcher)
+	m.mu.RUnlock()
+	return
 }
 
 // Get an element from the key.

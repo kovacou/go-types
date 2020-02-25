@@ -13,7 +13,7 @@ func (s *Floats) Reset() {
 	*s = []float64{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Floats) Contains(values ...float64) bool {
 	findNum := 0
 	for i := range s {
@@ -46,7 +46,7 @@ func (s Floats) Copy() Floats {
 	return out
 }
 
-// Diff return the difference between "s" and "s2".
+// Diff returns the difference between "s" and "s2".
 func (s Floats) Diff(s2 Floats) Floats {
 	if s.Empty() {
 		return s2.Copy()
@@ -147,7 +147,7 @@ func (s Floats) Last() (float64, bool) {
 	return 0, false
 }
 
-// Len return the size of the slice.
+// Len returns the size of the slice.
 func (s Floats) Len() int {
 	return len(s)
 }
@@ -175,7 +175,7 @@ func (s Floats) Take(n int) (out Floats) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Floats float64o []float64erface{}
+// S convert s to []interface{}
 func (s Floats) S() (out []interface{}) {
 	for _, v := range s {
 		out = append(out, v)

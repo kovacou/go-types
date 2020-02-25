@@ -13,7 +13,7 @@ func (s *Bools) Reset() {
 	*s = []bool{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Bools) Contains(values ...bool) bool {
 	findNum := 0
 	for i := range s {
@@ -46,7 +46,7 @@ func (s Bools) Copy() Bools {
 	return out
 }
 
-// Diff return the difference between "s" and "s2".
+// Diff returns the difference between "s" and "s2".
 func (s Bools) Diff(s2 Bools) Bools {
 	if s.Empty() {
 		return s2.Copy()
@@ -147,7 +147,7 @@ func (s Bools) Last() (bool, bool) {
 	return false, false
 }
 
-// Len return the size of the slice.
+// Len returns the size of the slice.
 func (s Bools) Len() int {
 	return len(s)
 }
@@ -162,7 +162,7 @@ func (s Bools) Take(n int) (out Bools) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Bools into []interface{}
+// S convert s into []interface{}
 func (s Bools) S() (out []interface{}) {
 	for _, v := range s {
 		out = append(out, v)

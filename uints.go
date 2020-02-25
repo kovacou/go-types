@@ -13,7 +13,7 @@ func (s *Uints) Reset() {
 	*s = []uint{}
 }
 
-// Contains says if "s" contains "values".
+// Contains say if "s" contains "values".
 func (s Uints) Contains(values ...uint) bool {
 	findNum := 0
 	for i := range s {

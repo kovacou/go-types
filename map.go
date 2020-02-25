@@ -1,11 +1,11 @@
-// Copyright © 2019 Alexandre Kovac <contact@kovacou.com>.
+// Copyright © 2019 Alexandre KOVAC <contact@kovacou.com>.
 //
 // Use of this source code is governed by an MIT-style
 // license that can be found in the LICENSE file.
 
 package types
 
-// Map is an hashmap.
+// Map is a hashmap.
 type Map map[string]interface{}
 
 // Reset the values of the map.
@@ -30,7 +30,7 @@ func (m Map) Copy() Map {
 }
 
 // Find the first element matching the pattern.
-func (m Map) Find(matcher func(k string, v interface{}) bool) (string, interface{}, bool) {
+func (m Map) Find(matcher Matcher) (string, interface{}, bool) {
 	for k, v := range m {
 		if matcher(k, v) {
 			return k, v, true
@@ -40,7 +40,7 @@ func (m Map) Find(matcher func(k string, v interface{}) bool) (string, interface
 }
 
 // FindAll elements matching the pattern.
-func (m Map) FindAll(matcher func(k string, v interface{}) bool) Map {
+func (m Map) FindAll(matcher Matcher) Map {
 	out := Map{}
 	for k, v := range m {
 		if matcher(k, v) {
@@ -69,7 +69,7 @@ func (m Map) Keys() []string {
 	return out
 }
 
-// Len return the size of the map.
+// Len returns the size of the map.
 func (m Map) Len() int {
 	return len(m)
 }

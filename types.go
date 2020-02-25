@@ -1,8 +1,15 @@
+// Copyright © 2019 Alexandre Kovac <contact@kovacou.com>.
+//
+// Use of this source code is governed by an MIT-style
+// license that can be found in the LICENSE file.
+
 package types
 
 import "time"
 
-// Int return the value of `v`.
+type Matcher func(k string, v interface{}) bool
+
+// Int returns the value of `v`.
 func Int(v *int) int {
 	if v != nil {
 		return *v
@@ -12,6 +19,19 @@ func Int(v *int) int {
 
 // IntPtr return a pointer of `v`.
 func IntPtr(v int) *int {
+	return &v
+}
+
+// Uint returns the value of `v`.
+func Uint(v *uint) uint {
+	if v != nil {
+		return *v
+	}
+	return 0
+}
+
+// UintPtr return a pointer of `v`.
+func UintPtr(v uint) *uint {
 	return &v
 }
 
@@ -28,6 +48,19 @@ func Int64Ptr(v int64) *int64 {
 	return &v
 }
 
+// Uint64 return the value of `v`.
+func Uint64(v *uint64) uint64 {
+	if v != nil {
+		return *v
+	}
+	return 0
+}
+
+// Uint64Ptr return a pointer of `v`.
+func Uint64Ptr(v uint64) *uint64 {
+	return &v
+}
+
 // Float64 return the value of `v`.
 func Float64(v *float64) float64 {
 	if v != nil {
@@ -41,7 +74,7 @@ func Float64Ptr(v float64) *float64 {
 	return &v
 }
 
-// String return the value of `v`.
+// String returns the value of `v`.
 func String(v *string) string {
 	if v != nil {
 		return *v
