@@ -9,12 +9,25 @@ import "sync"
 
 // TSafeMap abstract the implementation of SyncMap.
 type TSafeMap interface {
+	// Add a new entry if the given key is not filled.
 	Add(string, interface{})
+
+	// Find the first element matching the pattern.
 	Find(Matcher) (string, interface{}, bool)
+
+	// FindAll elements matching the pattern.
 	FindAll(Matcher) Map
+
+	// Get an element from the key.
 	Get(string) (interface{}, bool)
+
+	// Map convert TSafeMap to Map.
 	Map() Map
+
+	// Set a new entry or change an entry for the given key "k".
 	Set(string, interface{})
+
+	// Reset the values.
 	Reset()
 }
 
@@ -32,7 +45,6 @@ type tsafeMap struct {
 	values Map
 }
 
-// Add a new entry if the given key is not filled.
 func (m *tsafeMap) Add(k string, v interface{}) {
 	m.mu.Lock()
 	if _, ok := m.values[k]; !ok {
@@ -41,7 +53,6 @@ func (m *tsafeMap) Add(k string, v interface{}) {
 	m.mu.Unlock()
 }
 
-// Find the first element matching the pattern.
 func (m *tsafeMap) Find(matcher Matcher) (k string, v interface{}, ok bool) {
 	m.mu.RLock()
 	k, v, ok = m.values.Find(matcher)
@@ -49,7 +60,6 @@ func (m *tsafeMap) Find(matcher Matcher) (k string, v interface{}, ok bool) {
 	return
 }
 
-// FindAll elements matching the pattern.
 func (m *tsafeMap) FindAll(matcher Matcher) (out Map) {
 	m.mu.RLock()
 	out = m.values.FindAll(matcher)
@@ -57,7 +67,6 @@ func (m *tsafeMap) FindAll(matcher Matcher) (out Map) {
 	return
 }
 
-// Get an element from the key.
 func (m *tsafeMap) Get(k string) (v interface{}, ok bool) {
 	m.mu.RLock()
 	v, ok = m.values[k]
@@ -65,7 +74,6 @@ func (m *tsafeMap) Get(k string) (v interface{}, ok bool) {
 	return
 }
 
-// Map convert TSafeMap to Map.
 func (m *tsafeMap) Map() (out Map) {
 	m.mu.RLock()
 	out = m.values.Copy()
@@ -73,14 +81,12 @@ func (m *tsafeMap) Map() (out Map) {
 	return
 }
 
-// Set a new entry or change an entry for the given key "k".
 func (m *tsafeMap) Set(k string, v interface{}) {
 	m.mu.Lock()
 	m.values[k] = v
 	m.mu.Unlock()
 }
 
-// Reset the values.
 func (m *tsafeMap) Reset() {
 	m.mu.Lock()
 	m.values.Reset()
