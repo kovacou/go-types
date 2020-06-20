@@ -182,3 +182,11 @@ func (s Uints) S() (out []interface{}) {
 	}
 	return
 }
+
+// Uint64s convert Uints to Uint64s
+func (s Uints) Uint64s() (out Uint64s) {
+	for _, v := range s {
+		out = append(out, uint64(v))
+	}
+	return
+}
