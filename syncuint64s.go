@@ -1,6 +1,8 @@
 package types
 
-import "sync"
+import (
+	"sync"
+)
 
 type TSafeUint64s interface {
 	// Reset the slice.
