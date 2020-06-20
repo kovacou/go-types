@@ -26,6 +26,7 @@ Thread-safe types also supported.
 | Strings    |  `[]string`    |
 | Bytes      |  `[]byte`      |
 | Bools      |  `[]bool`      |
+| Slice      | `[]interface{}`|
 
 ## Support sync
 
@@ -43,3 +44,9 @@ m.Init(5)
 |  Alias     |      Wrapper   |     Type                 |
 |:----------:|:--------------:|:------------------------:|
 | TSafeMap   | `SyncMap()`    | `map[string]interface{}` |
+| TSafeStrings   | `SyncStrings()`    | `[]string` |
+| TSafeInts   | `SyncInts()`    | `[]int` |
+| TSafeUints   | `SyncUints()`    | `[]uint` |
+| TSafeInt64s   | `SyncInt64s()`    | `[]int64` |
+| TSafeUint64s   | `SyncUint64s()`    | `[]uint64` |
+
