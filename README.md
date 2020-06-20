@@ -35,12 +35,6 @@ You can use the wrapper `types.SyncXXX()` :
 m := types.SyncMap()
 ```
 
-Or use the struct definition `types.TSafeXXX` :
-```go
-m := types.TSafeMap{}
-m.Init(5)
-```
-
 |  Alias     |      Wrapper   |     Type                 |
 |:----------:|:--------------:|:------------------------:|
 | TSafeMap   | `SyncMap()`    | `map[string]interface{}` |
