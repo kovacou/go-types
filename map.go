@@ -5,6 +5,8 @@
 
 package types
 
+import "time"
+
 // Map is a hashmap.
 type Map map[string]interface{}
 
@@ -86,4 +88,51 @@ func (m Map) Values() []interface{} {
 		out = append(out, m[k])
 	}
 	return out
+}
+
+// Get an element from the map.
+func (m Map) Get(k string) (v interface{}, ok bool) {
+	v, ok = m[k]
+	return
+}
+
+// String get an element from the map as string.
+func (m Map) String(k string) string {
+	return m[k].(string)
+}
+
+func (m Map) StringPtr(k string) *string {
+	return StringPtr(m.String(k))
+}
+
+func (m Map) Int(k string) int {
+	return m[k].(int)
+}
+
+func (m Map) IntPtr(k string) *int {
+	return IntPtr(m.Int(k))
+}
+
+func (m Map) Int64(k string) int64 {
+	return m[k].(int64)
+}
+
+func (m Map) Int64Ptr(k string) *int64 {
+	return Int64Ptr(m.Int64(k))
+}
+
+func (m Map) Uint64(k string) uint64 {
+	return uint64(m.Int64(k))
+}
+
+func (m Map) Uint64Ptr(k string) *uint64 {
+	return Uint64Ptr(m.Uint64(k))
+}
+
+func (m Map) Time(k string) time.Time {
+	return m[k].(time.Time)
+}
+
+func (m Map) TimePtr(k string) *time.Time {
+	return TimePtr(m.Time(k))
 }
