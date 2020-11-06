@@ -10,6 +10,14 @@ func makeDefaultFloats() Floats {
 	return Floats{1, 2, 3, 4, 5}
 }
 
+func TestFloats_Add(t *testing.T) {
+	s := Floats{}
+	s.Add(1, 2, 3)
+
+	assert.Len(t, s, 3)
+	assert.Equal(t, s, Floats{1, 2, 3})
+}
+
 func TestFloatsReset(t *testing.T) {
 	s := &Floats{1, 2, 3, 4, 5}
 	s2 := s.Copy()

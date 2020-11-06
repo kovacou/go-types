@@ -13,6 +13,11 @@ func (s *Uints) Reset() {
 	*s = []uint{}
 }
 
+// Add new elements to the slice.
+func (s *Uints) Add(values ...uint) {
+	*s = append(*s, values...)
+}
+
 // Contains say if "s" contains "values".
 func (s Uints) Contains(values ...uint) bool {
 	findNum := 0

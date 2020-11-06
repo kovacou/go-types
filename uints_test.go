@@ -10,6 +10,14 @@ func makeDefaultUints() Uints {
 	return Uints{1, 2, 3, 4, 5}
 }
 
+func TestUints_Add(t *testing.T) {
+	s := Uints{}
+	s.Add(1, 2, 3)
+
+	assert.Len(t, s, 3)
+	assert.Equal(t, s, Uints{1, 2, 3})
+}
+
 func TestUintsReset(t *testing.T) {
 	s := &Uints{1, 2, 3, 4, 5}
 	s2 := s.Copy()

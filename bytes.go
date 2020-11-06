@@ -13,6 +13,11 @@ func (s *Bytes) Reset() {
 	*s = []byte{}
 }
 
+// Add new elements to the slice.
+func (s *Bytes) Add(values ...byte) {
+	*s = append(*s, values...)
+}
+
 // Contains say if "s" contains "values".
 func (s Bytes) Contains(values ...byte) bool {
 	findNum := 0

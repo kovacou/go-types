@@ -13,6 +13,11 @@ func (s *Uint64s) Reset() {
 	*s = []uint64{}
 }
 
+// Add new elements to the slice.
+func (s *Uint64s) Add(values ...uint64) {
+	*s = append(*s, values...)
+}
+
 // Contains says if "s" contains "values".
 func (s Uint64s) Contains(values ...uint64) bool {
 	findNum := 0

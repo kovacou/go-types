@@ -10,6 +10,14 @@ func makeDefaultInt64s() Int64s {
 	return Int64s{1, 2, 3, 4, 5}
 }
 
+func TestInt64s_Add(t *testing.T) {
+	s := Int64s{}
+	s.Add(1, 2, 3)
+
+	assert.Len(t, s, 3)
+	assert.Equal(t, s, Int64s{1, 2, 3})
+}
+
 func TestInt64sReset(t *testing.T) {
 	s := &Int64s{1, 2, 3, 4, 5}
 	s2 := s.Copy()

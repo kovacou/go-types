@@ -13,6 +13,11 @@ func (s *Bools) Reset() {
 	*s = []bool{}
 }
 
+// Add new elements to the slice.
+func (s *Bools) Add(values ...bool) {
+	*s = append(*s, values...)
+}
+
 // Contains say if "s" contains "values".
 func (s Bools) Contains(values ...bool) bool {
 	findNum := 0

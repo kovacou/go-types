@@ -13,6 +13,11 @@ func (s *Floats) Reset() {
 	*s = []float64{}
 }
 
+// Add new elements to the slice.
+func (s *Floats) Add(values ...float64) {
+	*s = append(*s, values...)
+}
+
 // Contains say if "s" contains "values".
 func (s Floats) Contains(values ...float64) bool {
 	findNum := 0

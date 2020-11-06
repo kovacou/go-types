@@ -10,6 +10,14 @@ func makeDefaultBytes() Bytes {
 	return Bytes{1, 2, 3, 4, 5}
 }
 
+func TestBytes_Add(t *testing.T) {
+	s := Bytes{}
+	s.Add(1, 2, 3)
+
+	assert.Len(t, s, 3)
+	assert.Equal(t, s, Bytes{1, 2, 3})
+}
+
 func TestBytesReset(t *testing.T) {
 	s := &Bytes{1, 2, 3, 4, 5}
 	s2 := s.Copy()

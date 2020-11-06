@@ -13,6 +13,11 @@ func (s *Slice) Reset() {
 	*s = []interface{}{}
 }
 
+// Add new elements to the slice.
+func (s *Slice) Add(values ...interface{}) {
+	*s = append(*s, values...)
+}
+
 // Contains say if "s" contains "values".
 func (s Slice) Contains(values ...interface{}) bool {
 	findNum := 0
