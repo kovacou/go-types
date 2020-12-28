@@ -7,6 +7,7 @@ package types
 
 import (
 	"bytes"
+	"database/sql/driver"
 	"time"
 )
 
@@ -20,6 +21,12 @@ func NewDate(t time.Time) Date {
 	return Date{t}
 }
 
+// ParseDate returns the Date of the given string.
+func ParseDate(t string) Date {
+	dt, _ := time.Parse(DateFormat, t)
+	return NewDate(dt)
+}
+
 // Date is a wrapper around time.Time.
 type Date struct {
 	time.Time
@@ -27,7 +34,6 @@ type Date struct {
 
 // MarshalJSON implements the json.Marshaler interface.
 func (d Date) MarshalJSON() ([]byte, error) {
-	d.Time.MarshalJSON()
 	b := bytes.NewBuffer([]byte{})
 	b.WriteRune('"')
 	b.WriteString(d.Format(DateFormat))
@@ -40,9 +46,20 @@ func (d Date) String() string {
 	return d.Format(DateFormat)
 }
 
+// Value implements the database.Valuer interface.
+func (d Date) Value() (driver.Value, error) {
+	return d.String(), nil
+}
+
 // NewDateTime create a new DateTime from a time.Time.
 func NewDateTime(t time.Time) DateTime {
 	return DateTime{t}
+}
+
+// ParseDateTime returns the DateTime of the given string.
+func ParseDateTime(t string) DateTime {
+	dt, _ := time.Parse(DateTimeFormat, t)
+	return NewDateTime(dt)
 }
 
 // DateTime is a wrapper around time.Time.
@@ -62,4 +79,9 @@ func (d DateTime) MarshalJSON() ([]byte, error) {
 // String returns the string representation of the datetime.
 func (d DateTime) String() string {
 	return d.Format(DateTimeFormat)
+}
+
+// Value implements the database.Valuer interface.
+func (d DateTime) Value() (driver.Value, error) {
+	return d.String(), nil
 }
