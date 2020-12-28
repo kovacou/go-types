@@ -35,6 +35,11 @@ func (d Date) MarshalJSON() ([]byte, error) {
 	return b.Bytes(), nil
 }
 
+// String returns the string representation of the date.
+func (d Date) String() string {
+	return d.Format(DateFormat)
+}
+
 // NewDateTime create a new DateTime from a time.Time.
 func NewDateTime(t time.Time) DateTime {
 	return DateTime{t}
@@ -52,4 +57,9 @@ func (d DateTime) MarshalJSON() ([]byte, error) {
 	b.WriteString(d.Format(DateTimeFormat))
 	b.WriteRune('"')
 	return b.Bytes(), nil
+}
+
+// String returns the string representation of the datetime.
+func (d DateTime) String() string {
+	return d.Format(DateTimeFormat)
 }
