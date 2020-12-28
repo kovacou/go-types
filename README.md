@@ -11,9 +11,6 @@ Thread-safe types also supported.
 |:----------:|:----------------------------:|
 | Map        |  `map[string]interface{}`    |
 
-
-
-
 ### Slices :
 
 |  Alias     |      Type      |
@@ -27,6 +24,13 @@ Thread-safe types also supported.
 | Bytes      |  `[]byte`      |
 | Bools      |  `[]bool`      |
 | Slice      | `[]interface{}`|
+
+### Time & Date :
+|  Alias     |      Wrapper   |      Type                    |
+|:----------:|:---------------:|:------------:|
+| Date       |  `NewDate()`    |  `Date`      |
+| DateTime   | `NewDateTime()` |  `DateTime`  |
+
 
 ## Support sync
 
