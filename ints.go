@@ -152,9 +152,47 @@ func (s Ints) Last() (int, bool) {
 	return 0, false
 }
 
-// Len returns the size of the slice.
+// Len return the size of the slice.
 func (s Ints) Len() int {
 	return len(s)
+}
+
+// LenIf return the size of the slice if the filter is valid.
+func (s Ints) LenIf(f func(v int) bool) (n int) {
+	for _, v := range s {
+		if f(v) {
+			n++
+		}
+	}
+	return
+}
+
+// Mean of the slice.
+func (s Ints) Mean() (mean float64) {
+	return float64(s.Sum()) / float64(s.Len())
+}
+
+// MeanIf the filter is valid of the slice.
+func (s Ints) MeanIf(f func(v int) bool) (mean float64) {
+	return float64(s.SumIf(f)) / float64(s.LenIf(f))
+}
+
+// Sum of the slice.
+func (s Ints) Sum() (sum int) {
+	for _, v := range s {
+		sum += v
+	}
+	return
+}
+
+// SumIf the filter is valid of the slice.
+func (s Ints) SumIf(f func(v int) bool) (sum int) {
+	for _, v := range s {
+		if f(v) {
+			sum += v
+		}
+	}
+	return
 }
 
 // Take n element and return a new slice.

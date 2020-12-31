@@ -8,6 +8,11 @@ package types
 // Int64s is a slice of int64.
 type Int64s []int64
 
+// Int64NoZero is a filter for LenIf, SumIf, MeanIf.
+func Int64NoZero(v int64) bool {
+	return v != 0
+}
+
 // Reset the slice.
 func (s *Int64s) Reset() {
 	*s = []int64{}
@@ -152,9 +157,19 @@ func (s Int64s) Last() (int64, bool) {
 	return 0, false
 }
 
-// Len returns the size of the slice.
+// Len return the size of the slice.
 func (s Int64s) Len() int {
 	return len(s)
+}
+
+// LenIf return the size of the slice if the filter is valid.
+func (s Int64s) LenIf(f func(v int64) bool) (n int) {
+	for _, v := range s {
+		if f(v) {
+			n++
+		}
+	}
+	return
 }
 
 // Mean of the slice.
@@ -162,10 +177,25 @@ func (s Int64s) Mean() (mean float64) {
 	return float64(s.Sum()) / float64(s.Len())
 }
 
+// MeanIf the filter is valid of the slice.
+func (s Int64s) MeanIf(f func(v int64) bool) (mean float64) {
+	return float64(s.SumIf(f)) / float64(s.LenIf(f))
+}
+
 // Sum of the slice.
 func (s Int64s) Sum() (sum int64) {
 	for _, v := range s {
 		sum += v
+	}
+	return
+}
+
+// SumIf the filter is valid of the slice.
+func (s Int64s) SumIf(f func(v int64) bool) (sum int64) {
+	for _, v := range s {
+		if f(v) {
+			sum += v
+		}
 	}
 	return
 }

@@ -8,6 +8,11 @@ package types
 // Uint64s is a slice of uint64.
 type Uint64s []uint64
 
+// UInt64NoZero is a filter for LenIf, SumIf, MeanIf.
+func UInt64NoZero(v uint64) bool {
+	return v > 0
+}
+
 // Reset the slice.
 func (s *Uint64s) Reset() {
 	*s = []uint64{}
@@ -157,15 +162,40 @@ func (s Uint64s) Len() int {
 	return len(s)
 }
 
+// LenIf return the size of the slice if the filter is valid.
+func (s Uint64s) LenIf(f func(v uint64) bool) (n int) {
+	for _, v := range s {
+		if f(v) {
+			n++
+		}
+	}
+	return
+}
+
 // Mean of the slice.
 func (s Uint64s) Mean() (mean float64) {
 	return float64(s.Sum()) / float64(s.Len())
+}
+
+// MeanIf the filter is valid of the slice.
+func (s Uint64s) MeanIf(f func(v uint64) bool) (mean float64) {
+	return float64(s.SumIf(f)) / float64(s.LenIf(f))
 }
 
 // Sum of the slice.
 func (s Uint64s) Sum() (sum uint64) {
 	for _, v := range s {
 		sum += v
+	}
+	return
+}
+
+// SumIf the filter is valid of the slice.
+func (s Uint64s) SumIf(f func(v uint64) bool) (sum uint64) {
+	for _, v := range s {
+		if f(v) {
+			sum += v
+		}
 	}
 	return
 }

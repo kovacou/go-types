@@ -8,6 +8,11 @@ package types
 // Floats is a slice of float64.
 type Floats []float64
 
+// Float64NoZero is a filter for LenIf, SumIf, MeanIf.
+func Float64NoZero(v float64) bool {
+	return v != 0
+}
+
 // Reset the slice.
 func (s *Floats) Reset() {
 	*s = []float64{}
@@ -157,15 +162,40 @@ func (s Floats) Len() int {
 	return len(s)
 }
 
+// LenIf return the size of the slice if the filter is valid.
+func (s Floats) LenIf(f func(v float64) bool) (n int) {
+	for _, v := range s {
+		if f(v) {
+			n++
+		}
+	}
+	return
+}
+
 // Mean of the slice.
 func (s Floats) Mean() (mean float64) {
 	return s.Sum() / float64(s.Len())
+}
+
+// MeanIf the filter is valid of the slice.
+func (s Floats) MeanIf(f func(v float64) bool) (mean float64) {
+	return s.SumIf(f) / float64(s.LenIf(f))
 }
 
 // Sum of the slice.
 func (s Floats) Sum() (sum float64) {
 	for _, v := range s {
 		sum += v
+	}
+	return
+}
+
+// SumIf the filter is valid of the slice.
+func (s Floats) SumIf(f func(v float64) bool) (sum float64) {
+	for _, v := range s {
+		if f(v) {
+			sum += v
+		}
 	}
 	return
 }
