@@ -5,7 +5,9 @@
 
 package types
 
-import "time"
+import (
+	"time"
+)
 
 // Map is a hashmap.
 type Map map[string]interface{}
@@ -19,6 +21,13 @@ func (m *Map) Reset() {
 func (m Map) Add(k string, v interface{}) {
 	if _, ok := m[k]; !ok {
 		m[k] = v
+	}
+}
+
+// Merge another map.
+func (m Map) Merge(v map[string]interface{}) {
+	for k, v := range m {
+		m.Add(k, v)
 	}
 }
 
