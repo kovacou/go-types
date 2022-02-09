@@ -25,8 +25,8 @@ func (m Map) Add(k string, v interface{}) {
 }
 
 // Merge another map.
-func (m Map) Merge(v map[string]interface{}) {
-	for k, v := range m {
+func (m Map) Merge(sub map[string]interface{}) {
+	for k, v := range sub {
 		m.Add(k, v)
 	}
 }
