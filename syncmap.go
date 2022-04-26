@@ -10,22 +10,22 @@ import "sync"
 // TSafeMap abstract the implementation of SyncMap.
 type TSafeMap interface {
 	// Add a new entry if the given key is not filled.
-	Add(string, interface{})
+	Add(string, any)
 
 	// Find the first element matching the pattern.
-	Find(Matcher) (string, interface{}, bool)
+	Find(Matcher) (string, any, bool)
 
 	// FindAll elements matching the pattern.
 	FindAll(Matcher) Map
 
 	// Get an element from the key.
-	Get(string) (interface{}, bool)
+	Get(string) (any, bool)
 
 	// Map convert TSafeMap to Map.
 	Map() Map
 
 	// Set a new entry or change an entry for the given key "k".
-	Set(string, interface{})
+	Set(string, any)
 
 	// Reset the values.
 	Reset()
@@ -45,7 +45,7 @@ type tsafeMap struct {
 	values Map
 }
 
-func (m *tsafeMap) Add(k string, v interface{}) {
+func (m *tsafeMap) Add(k string, v any) {
 	m.mu.Lock()
 	if _, ok := m.values[k]; !ok {
 		m.values[k] = v
@@ -53,7 +53,7 @@ func (m *tsafeMap) Add(k string, v interface{}) {
 	m.mu.Unlock()
 }
 
-func (m *tsafeMap) Find(matcher Matcher) (k string, v interface{}, ok bool) {
+func (m *tsafeMap) Find(matcher Matcher) (k string, v any, ok bool) {
 	m.mu.RLock()
 	k, v, ok = m.values.Find(matcher)
 	m.mu.RUnlock()
@@ -67,7 +67,7 @@ func (m *tsafeMap) FindAll(matcher Matcher) (out Map) {
 	return
 }
 
-func (m *tsafeMap) Get(k string) (v interface{}, ok bool) {
+func (m *tsafeMap) Get(k string) (v any, ok bool) {
 	m.mu.RLock()
 	v, ok = m.values[k]
 	m.mu.RUnlock()
@@ -81,7 +81,7 @@ func (m *tsafeMap) Map() (out Map) {
 	return
 }
 
-func (m *tsafeMap) Set(k string, v interface{}) {
+func (m *tsafeMap) Set(k string, v any) {
 	m.mu.Lock()
 	m.values[k] = v
 	m.mu.Unlock()

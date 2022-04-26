@@ -5,21 +5,21 @@
 
 package types
 
-// Slice is a slice of interface{}.
-type Slice []interface{}
+// Slice is a slice of any.
+type Slice []any
 
 // Reset the slice.
 func (s *Slice) Reset() {
-	*s = []interface{}{}
+	*s = []any{}
 }
 
 // Add new elements to the slice.
-func (s *Slice) Add(values ...interface{}) {
+func (s *Slice) Add(values ...any) {
 	*s = append(*s, values...)
 }
 
 // Contains say if "s" contains "values".
-func (s Slice) Contains(values ...interface{}) bool {
+func (s Slice) Contains(values ...any) bool {
 	findNum := 0
 	for i := range s {
 		for _, value := range values {
@@ -33,7 +33,7 @@ func (s Slice) Contains(values ...interface{}) bool {
 }
 
 // ContainsOneOf says if "s" contains one of the "values".
-func (s Slice) ContainsOneOf(values ...interface{}) bool {
+func (s Slice) ContainsOneOf(values ...any) bool {
 	for _, value := range values {
 		for i := range s {
 			if s[i] == value {
@@ -97,7 +97,7 @@ func (s Slice) Equal(s2 Slice) bool {
 }
 
 // Find the first element matching the pattern.
-func (s Slice) Find(matcher func(v interface{}) bool) (interface{}, bool) {
+func (s Slice) Find(matcher func(v any) bool) (any, bool) {
 	for _, val := range s {
 		if matcher(val) {
 			return val, true
@@ -107,7 +107,7 @@ func (s Slice) Find(matcher func(v interface{}) bool) (interface{}, bool) {
 }
 
 // FindAll elements matching the pattern.
-func (s Slice) FindAll(matcher func(v interface{}) bool) Slice {
+func (s Slice) FindAll(matcher func(v any) bool) Slice {
 	out := Slice{}
 	for _, val := range s {
 		if matcher(val) {
@@ -118,7 +118,7 @@ func (s Slice) FindAll(matcher func(v interface{}) bool) Slice {
 }
 
 // First return the value of the first element.
-func (s Slice) First() (interface{}, bool) {
+func (s Slice) First() (any, bool) {
 	if len(s) > 0 {
 		return s[0], true
 	}
@@ -126,7 +126,7 @@ func (s Slice) First() (interface{}, bool) {
 }
 
 // Get the element "i" and say if it has been found.
-func (s Slice) Get(i int) (interface{}, bool) {
+func (s Slice) Get(i int) (any, bool) {
 	if i > s.Len() {
 		return "", false
 	}
@@ -145,7 +145,7 @@ func (s Slice) Intersect(s2 Slice) Slice {
 }
 
 // Last return the value of the last element.
-func (s Slice) Last() (interface{}, bool) {
+func (s Slice) Last() (any, bool) {
 	if n := len(s); n > 0 {
 		return s[n-1], true
 	}
@@ -167,8 +167,8 @@ func (s Slice) Take(n int) (out Slice) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert s into []interface{}
-func (s Slice) S() (out []interface{}) {
+// S convert s into []any
+func (s Slice) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

@@ -210,8 +210,8 @@ func (s Floats) Take(n int) (out Floats) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert s to []interface{}
-func (s Floats) S() (out []interface{}) {
+// S convert s to []any
+func (s Floats) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

@@ -50,8 +50,8 @@ type TSafeUint64s interface {
 	// Take n element and return a new slice.
 	Take(int) Uint64s
 
-	// S convert s into []interface{}
-	S() []interface{}
+	// S convert s into []any
+	S() []any
 
 	// S convert s into Uint64s
 	Uint64s() Uint64s
@@ -171,7 +171,7 @@ func (s *tsafeUint64s) Take(n int) (v Uint64s) {
 	return
 }
 
-func (s *tsafeUint64s) S() (out []interface{}) {
+func (s *tsafeUint64s) S() (out []any) {
 	s.mu.RLock()
 	out = s.values.S()
 	s.mu.RUnlock()

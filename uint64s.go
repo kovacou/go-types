@@ -210,8 +210,8 @@ func (s Uint64s) Take(n int) (out Uint64s) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Uint64s into []interface{}
-func (s Uint64s) S() (out []interface{}) {
+// S convert Uint64s into []any
+func (s Uint64s) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

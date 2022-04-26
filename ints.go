@@ -205,8 +205,8 @@ func (s Ints) Take(n int) (out Ints) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert s into []interface{}
-func (s Ints) S() (out []interface{}) {
+// S convert s into []any
+func (s Ints) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

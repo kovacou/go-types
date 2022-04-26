@@ -48,8 +48,8 @@ type TSafeStrings interface {
 	// Take n element and return a new slice.
 	Take(int) Strings
 
-	// S convert s into []interface{}
-	S() []interface{}
+	// S convert s into []any
+	S() []any
 
 	// S convert s into Strings
 	Strings() Strings
@@ -169,7 +169,7 @@ func (s *tsafeStrings) Take(n int) (v Strings) {
 	return
 }
 
-func (s *tsafeStrings) S() (out []interface{}) {
+func (s *tsafeStrings) S() (out []any) {
 	s.mu.RLock()
 	out = s.values.S()
 	s.mu.RUnlock()

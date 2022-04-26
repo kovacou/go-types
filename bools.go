@@ -167,8 +167,8 @@ func (s Bools) Take(n int) (out Bools) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert s into []interface{}
-func (s Bools) S() (out []interface{}) {
+// S convert s into []any
+func (s Bools) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

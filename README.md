@@ -9,7 +9,7 @@ Thread-safe types also supported.
 
 |  Alias     |      Type                    |
 |:----------:|:----------------------------:|
-| Map        |  `map[string]interface{}`    |
+| Map        |  `map[string]any`    |
 
 ### Slices :
 
@@ -23,7 +23,7 @@ Thread-safe types also supported.
 | Strings    |  `[]string`    |
 | Bytes      |  `[]byte`      |
 | Bools      |  `[]bool`      |
-| Slice      | `[]interface{}`|
+| Slice      | `[]any`|
 
 ### Time & Date :
 |  Alias     |      Wrapper   |      Type                    |
@@ -41,7 +41,7 @@ m := types.SyncMap()
 
 |  Alias     |      Wrapper   |     Type                 |
 |:----------:|:--------------:|:------------------------:|
-| TSafeMap   | `SyncMap()`    | `map[string]interface{}` |
+| TSafeMap   | `SyncMap()`    | `map[string]any` |
 | TSafeStrings   | `SyncStrings()`    | `[]string` |
 | TSafeInts   | `SyncInts()`    | `[]int` |
 | TSafeUints   | `SyncUints()`    | `[]uint` |

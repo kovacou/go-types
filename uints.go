@@ -180,8 +180,8 @@ func (s Uints) Take(n int) (out Uints) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert Uints into []interface{}
-func (s Uints) S() (out []interface{}) {
+// S convert Uints into []any
+func (s Uints) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

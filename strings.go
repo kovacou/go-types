@@ -167,8 +167,8 @@ func (s Strings) Take(n int) (out Strings) {
 
 // ----------------- CONVERTING METHOD -----------------
 
-// S convert s into []interface{}
-func (s Strings) S() (out []interface{}) {
+// S convert s into []any
+func (s Strings) S() (out []any) {
 	for _, v := range s {
 		out = append(out, v)
 	}

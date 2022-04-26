@@ -8,6 +8,7 @@ package types
 import (
 	"bytes"
 	"database/sql/driver"
+	"strings"
 	"time"
 )
 
@@ -31,6 +32,17 @@ func ParseDate(t string) Date {
 // Date is a wrapper around time.Time.
 type Date struct {
 	time.Time
+}
+
+func (d *Date) UnmarshalJSON(b []byte) (err error) {
+	s := strings.Trim(string(b), "\"")
+	if s == "null" {
+		d.Time = time.Time{}
+		return
+	}
+
+	d.Time, err = time.Parse(DateFormat, s)
+	return
 }
 
 // MarshalJSON implements the json.Marshaler interface.

@@ -7,7 +7,7 @@ package types
 
 import "time"
 
-type Matcher func(k string, v interface{}) bool
+type Matcher func(k string, v any) bool
 
 // Int returns the value of `v`.
 func Int(v *int) int {

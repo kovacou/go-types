@@ -10,7 +10,7 @@ import (
 )
 
 // Map is a hashmap.
-type Map map[string]interface{}
+type Map map[string]any
 
 // Reset the values of the map.
 func (m *Map) Reset() {
@@ -18,14 +18,14 @@ func (m *Map) Reset() {
 }
 
 // Add a value to the map if the key doesn't exists.
-func (m Map) Add(k string, v interface{}) {
+func (m Map) Add(k string, v any) {
 	if _, ok := m[k]; !ok {
 		m[k] = v
 	}
 }
 
 // Merge another map.
-func (m Map) Merge(sub map[string]interface{}) {
+func (m Map) Merge(sub map[string]any) {
 	for k, v := range sub {
 		m.Add(k, v)
 	}
@@ -41,7 +41,7 @@ func (m Map) Copy() Map {
 }
 
 // Find the first element matching the pattern.
-func (m Map) Find(matcher Matcher) (string, interface{}, bool) {
+func (m Map) Find(matcher Matcher) (string, any, bool) {
 	for k, v := range m {
 		if matcher(k, v) {
 			return k, v, true
@@ -86,13 +86,13 @@ func (m Map) Len() int {
 }
 
 // Set a new value in the map.
-func (m Map) Set(k string, v interface{}) {
+func (m Map) Set(k string, v any) {
 	m[k] = v
 }
 
 // Values return the list of values.
-func (m Map) Values() []interface{} {
-	out := make([]interface{}, 0, len(m))
+func (m Map) Values() []any {
+	out := make([]any, 0, len(m))
 	for k := range m {
 		out = append(out, m[k])
 	}
@@ -100,7 +100,7 @@ func (m Map) Values() []interface{} {
 }
 
 // Get an element from the map.
-func (m Map) Get(k string) (v interface{}, ok bool) {
+func (m Map) Get(k string) (v any, ok bool) {
 	v, ok = m[k]
 	return
 }

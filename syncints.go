@@ -48,10 +48,10 @@ type TSafeInts interface {
 	// Take n element and return a new slice.
 	Take(int) Ints
 
-	// S convert s into []interface{}
-	S() []interface{}
+	// S convert s into []any
+	S() []any
 
-	// S convert s into Ints
+	// Ints convert s into Ints
 	Ints() Ints
 }
 
@@ -169,7 +169,7 @@ func (s *tsafeInts) Take(n int) (v Ints) {
 	return
 }
 
-func (s *tsafeInts) S() (out []interface{}) {
+func (s *tsafeInts) S() (out []any) {
 	s.mu.RLock()
 	out = s.values.S()
 	s.mu.RUnlock()
