@@ -10,7 +10,7 @@ func makeDefaultUint64s() Uint64s {
 	return Uint64s{1, 2, 3, 4, 5}
 }
 
-func TestUint64s_Add(t *testing.T) {
+func TestUint64s__Add(t *testing.T) {
 	s := Uint64s{}
 	s.Add(1, 2, 3)
 
@@ -18,7 +18,7 @@ func TestUint64s_Add(t *testing.T) {
 	assert.Equal(t, s, Uint64s{1, 2, 3})
 }
 
-func TestUint64sReset(t *testing.T) {
+func TestUint64s_Reset(t *testing.T) {
 	s := &Uint64s{1, 2, 3, 4, 5}
 	s2 := s.Copy()
 	s.Reset()
@@ -30,7 +30,7 @@ func TestUint64sReset(t *testing.T) {
 	assert.Empty(t, s2)
 }
 
-func TestUint64sCopy(t *testing.T) {
+func TestUint64s_Copy(t *testing.T) {
 	s := makeDefaultUint64s()
 	s2 := s.Copy()
 
@@ -39,7 +39,7 @@ func TestUint64sCopy(t *testing.T) {
 	assert.NotEqual(t, s, s2)
 }
 
-func TestUint64sDiff(t *testing.T) {
+func TestUint64s_Diff(t *testing.T) {
 	s := makeDefaultUint64s()
 	s2 := Uint64s{}
 
@@ -51,7 +51,7 @@ func TestUint64sDiff(t *testing.T) {
 	assert.Equal(t, Uint64s{2, 4}, s3.Diff(s))
 }
 
-func TestUint64sContains(t *testing.T) {
+func TestUint64s_Contains(t *testing.T) {
 	s := makeDefaultUint64s()
 	assert.True(t, s.Contains(1))
 	assert.True(t, s.Contains(1, 2, 3))
@@ -61,7 +61,7 @@ func TestUint64sContains(t *testing.T) {
 	assert.True(t, s.Contains(makeDefaultUint64s()...))
 }
 
-func TestUint64sContainsOneOf(t *testing.T) {
+func TestUint64s_ContainsOneOf(t *testing.T) {
 	s := makeDefaultUint64s()
 	assert.True(t, s.ContainsOneOf(1))
 	assert.True(t, s.ContainsOneOf(1, 2, 3))
@@ -72,14 +72,14 @@ func TestUint64sContainsOneOf(t *testing.T) {
 
 }
 
-func TestUint64sEmpty(t *testing.T) {
+func TestUint64s_Empty(t *testing.T) {
 	s := Uint64s{}
 	assert.True(t, s.Empty())
 	s = makeDefaultUint64s()
 	assert.False(t, s.Empty())
 }
 
-func TestUint64sEqual(t *testing.T) {
+func TestUint64s_Equal(t *testing.T) {
 	s := makeDefaultUint64s()
 	s2 := makeDefaultUint64s()
 	s3 := Uint64s{}
@@ -91,7 +91,7 @@ func TestUint64sEqual(t *testing.T) {
 	assert.False(t, s2.Equal(s4))
 }
 
-func TestUint64sExcludes(t *testing.T) {
+func TestUint64s_Excludes(t *testing.T) {
 	s := makeDefaultUint64s()
 	s2 := makeDefaultUint64s()
 	s3 := Uint64s{3, 4, 5}
@@ -118,7 +118,7 @@ func TestUint64s_Filter(t *testing.T) {
 	}))
 }
 
-func TestUint64sFirst(t *testing.T) {
+func TestUint64s_First(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{}
 	s3 := Uint64s{2, 4, 5}
@@ -142,7 +142,7 @@ func TestUint64sFirst(t *testing.T) {
 	}
 }
 
-func TestUint64sGet(t *testing.T) {
+func TestUint64s_Get(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{}
 	s3 := Uint64s{2, 4, 5}
@@ -166,7 +166,7 @@ func TestUint64sGet(t *testing.T) {
 	}
 }
 
-func TestUint64sIntersect(t *testing.T) {
+func TestUint64s_Intersect(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{2, 3, 4, 5}
 	s3 := Uint64s{}
@@ -176,7 +176,7 @@ func TestUint64sIntersect(t *testing.T) {
 	assert.Equal(t, s3, s.Intersect(s3))
 }
 
-func TestUint64sLast(t *testing.T) {
+func TestUint64s_Last(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{}
 	s3 := Uint64s{2, 4, 5}
@@ -200,7 +200,7 @@ func TestUint64sLast(t *testing.T) {
 	}
 }
 
-func TestUint64sTake(t *testing.T) {
+func TestUint64s_Take(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{}
 
