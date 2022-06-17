@@ -91,6 +91,33 @@ func TestUint64sEqual(t *testing.T) {
 	assert.False(t, s2.Equal(s4))
 }
 
+func TestUint64sExcludes(t *testing.T) {
+	s := makeDefaultUint64s()
+	s2 := makeDefaultUint64s()
+	s3 := Uint64s{3, 4, 5}
+	s4 := Uint64s{6, 7, 8, 9, 10}
+
+	assert.Empty(t, s.Excludes(s2))
+	assert.Equal(t, s4, s4.Excludes(s))
+	assert.Equal(t, Uint64s{1, 2}, s.Excludes(s3))
+}
+
+func TestUint64s_Filter(t *testing.T) {
+	s := makeDefaultUint64s()
+
+	assert.Equal(t, Uint64s{4, 5}, s.Filter(func(v uint64) bool {
+		return v > 3
+	}))
+
+	assert.Equal(t, Uint64s{1, 2}, s.Filter(func(v uint64) bool {
+		return v < 3
+	}))
+
+	assert.Empty(t, s.Filter(func(v uint64) bool {
+		return v == 0
+	}))
+}
+
 func TestUint64sFirst(t *testing.T) {
 	s := Uint64s{1, 2, 3}
 	s2 := Uint64s{}

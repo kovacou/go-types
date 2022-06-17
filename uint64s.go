@@ -101,6 +101,28 @@ func (s Uint64s) Equal(s2 Uint64s) bool {
 	return false
 }
 
+// Excludes elements from s2.
+func (s Uint64s) Excludes(s2 Uint64s) Uint64s {
+	out := Uint64s{}
+	for _, v := range s {
+		if !s2.Contains(v) {
+			out = append(out, v)
+		}
+	}
+	return out
+}
+
+// Filter elements matching the pattern.
+func (s Uint64s) Filter(matcher func(v uint64) bool) Uint64s {
+	out := Uint64s{}
+	for _, v := range s {
+		if matcher(v) {
+			out = append(out, v)
+		}
+	}
+	return out
+}
+
 // Find the first element matching the pattern.
 func (s Uint64s) Find(matcher func(v uint64) bool) (uint64, bool) {
 	for _, val := range s {
